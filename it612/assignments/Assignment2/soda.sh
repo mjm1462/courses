@@ -6,5 +6,5 @@
 #
 # Hint: Be careful with the $ sign — bash treats it as a variable prefix.
 # How do you prevent that?
-
+echo "A soda costs \$9?!"
 # Your code here

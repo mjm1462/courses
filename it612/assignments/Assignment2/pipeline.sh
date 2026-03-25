@@ -10,5 +10,7 @@
 #       Look into: sort, tee, head, tail
 
 printf "3\n2\n10\n5\n100\n25\n12\n13\n6\n" > input.dat
+cat input.dat | sort -rg > sorted.dat
+cat sorted.dat | tail +2 | head -5
 
 # Do not modify the above. Start your code here.
