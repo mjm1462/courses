@@ -18,12 +18,15 @@ echo "--- Line Counts ---"
 
 # TODO: Count total lines in the log file
 # echo "Total lines: $( ... )"
-
+echo "Total lines: $(cat server.log | wc -l)"
 # TODO: Count lines containing ERROR
 # echo "Error lines: $( ... )"
+echo "Error lines: $(cat server.log | grep ERROR | wc -l)"
+
 
 # TODO: Count lines containing WARN
 # echo "Warning lines: $( ... )"
+echo "Warning lines: $(cat server.log | grep WARN | wc -l)"
 
 echo ""
 
@@ -36,7 +39,7 @@ echo "--- Unique Error Messages ---"
 
 # TODO: grep ERROR lines, extract the message part, sort, remove duplicates
 # grep ... | awk ... | sort | uniq
-
+cat server.log | grep ERROR | awk '{for(i=4;i<=NF;i++) printf "%s ", $i; print ""}' | sort | uniq 
 echo ""
 
 # ─────────────────────────────────────────────
@@ -48,6 +51,7 @@ echo "--- Top Endpoints ---"
 
 # TODO: grep for GET or POST, extract method and path, count and rank
 # grep ... | awk ... | sort | uniq -c | sort -rn
+cat server.log | grep -E "POST | GET" | awk '{printf "%s %s", $4, $5; print ""}' | sort | uniq -c | sort -r
 
 echo ""
 
@@ -56,6 +60,8 @@ echo ""
 # Find login sessions and count per user.
 # ─────────────────────────────────────────────
 echo "--- User Logins ---"
+
+cat server.log | grep -o 'user=[a-z]*' | awk '{ split($0, arr, "="); print arr[2] }' | sort | uniq -c | sort -rn
 
 # TODO: grep for session lines, extract usernames, count and rank
 # grep ... | grep -o ... | sort | uniq -c | sort -rn
@@ -66,6 +72,6 @@ echo ""
 # Step 5: Save the Report
 # Add a timestamp line so you know when this ran.
 # ─────────────────────────────────────────────
-
+echo "Report generated: $(date)"
 # TODO: Print a line showing when this report was generated
 # echo "Report generated: $( ... )"
