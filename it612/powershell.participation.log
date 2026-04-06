@@ -1,0 +1,31 @@
+
+  Id     Duration CommandLine
+  --     -------- -----------
+   1        0.075 @'…
+   2        0.145 cls
+   3        0.022 $students = Get-Content students.json | ConvertFrom-Json
+   4        0.027 $students 
+   5        0.003 $students[0].name
+   6        0.002 $students[0].course
+   7        0.008 $students | Where-Object {$_.grade -gt 90}
+   8        0.003 $students | Where-Object {$_.grade -gt 90} | Select-Object name,grade
+   9        0.003 $students | Where-Object {$_.grade -gt 90} | Select-Object name,semester
+  10        0.001 $students | Where-Object {$_.course -eq "CS101"}
+  11        0.023 $students | Group-Object course | ForEach-Object {…
+  12        0.000 # Create a grade report CSV
+  13        0.010 $students |…
+  14        0.000 # Read it back
+  15        0.005 $students |    Select-Object name, course, grade, @{N='letter';E={        i…
+  16        0.004 Import-Csv grades-report.csv
+  17        0.165 $response = Invoke-RestMethod "https://api.github.com/repos/PowerShell/Powe…
+  18        0.043 $response
+  19        0.031 cls
+  20        0.002 $response.stargazers.count
+  21        0.000 $response.language
+  22        0.000 $response.description
+  23        0.011 $response.updated_at
+  24        0.019 Get-ChildItem Env: | Where-Object { $_.Name -like "*PATH*" }
+  25        0.004 [System.Environment]::OSVersion
+  26        0.000 [System.Environment]::ProcessorCount
+  27        0.002 $PSVersionTable
+  28        0.134 Get-Service | Where-Object Status -eq Running | Sort-Object DisplayName
